@@ -12,6 +12,8 @@
 
 #include "Cafe/GraphicPack/GraphicPack2.h"
 
+#include "wxHelper.h"
+
 enum ItemColumns
 {
 	ColumnName = 0,
@@ -24,7 +26,7 @@ ModuleWindow::ModuleWindow(DebuggerWindow2& parent, const wxPoint& main_position
 {
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
-	this->wxWindowBase::SetBackgroundColour(*wxWHITE);
+	this->wxWindowBase::SetBackgroundColour(wxHelper::getBackgroundPrimary());
 
 	wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
 

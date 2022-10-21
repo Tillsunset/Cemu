@@ -174,7 +174,7 @@ wxItemAttr* wxTitleManagerList::OnGetItemAttr(long item) const
 {
 	const auto entry = GetTitleEntry(item);
 	const wxColour kSecondColor{ 0xFDF9F2 };
-	static wxListItemAttr s_coloured_attr(GetTextColour(), kSecondColor, GetFont());
+	static wxListItemAttr s_coloured_attr(GetTextColour(), wxHelper::getBackgroundSecondary(), GetFont());
 	return item % 2 == 0 ? nullptr : &s_coloured_attr;
 }
 

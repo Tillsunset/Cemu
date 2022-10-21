@@ -1,6 +1,7 @@
 #include "gui/wxgui.h"
 #include "TextureRelationWindow.h"
 #include "Cafe/HW/Latte/Core/LatteTexture.h"
+#include "gui/wxHelper.h"
 
 enum
 {
@@ -128,7 +129,7 @@ TextureRelationViewerWindow::TextureRelationViewerWindow(wxFrame& parent)
 
 	RefreshTextureList();
 
-	wxFrame::SetBackgroundColour(*wxWHITE);
+	wxFrame::SetBackgroundColour(wxHelper::getBackgroundSecondary());
 }
 
 TextureRelationViewerWindow::~TextureRelationViewerWindow()
@@ -178,11 +179,10 @@ void TextureRelationViewerWindow::_setTextureRelationListItemTexture(wxListCtrl*
 	{
 		sprintf(tempStr + strlen(tempStr), "(%d)", alternativeViewCount + 1);
 	}
-	uint32 bgColor = 0xFFEEEEEE;
 	wxListItem item;
 	item.SetId(rowIndex);
 	item.SetText(tempStr);
-	item.SetBackgroundColour(wxColour(bgColor));
+	item.SetBackgroundColour(wxHelper::getBackgroundPrimary());
 	uiList->InsertItem(item);
 
 	sint32 columnIndex = 1;
@@ -274,7 +274,7 @@ void TextureRelationViewerWindow::_setTextureRelationListItemView(wxListCtrl* ui
 	wxListItem item;
 	item.SetId(rowIndex);
 	item.SetText(tempStr);
-	item.SetBackgroundColour(wxColour(bgColor));
+	item.SetBackgroundColour(wxHelper::getBackgroundPrimary());
 	uiList->InsertItem(item);
 	//uiList->SetItemPtrData(item, (wxUIntPtr)viewInfo);
 	sint32 columnIndex = 1;

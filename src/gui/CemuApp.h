@@ -34,6 +34,8 @@ private:
 
 	wxLocale m_locale;
 	std::vector<const wxLanguageInfo*> m_languages;
+
+	wxChoice* m_theme;
 };
 
 wxDECLARE_APP(CemuApp);

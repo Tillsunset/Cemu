@@ -8,6 +8,7 @@
 #include "Cafe/HW/Espresso/Debugger/Debugger.h"
 
 #include "Cemu/ExpressionParser/ExpressionParser.h"
+#include "wxHelper.h"
 
 enum
 {
@@ -29,7 +30,7 @@ BreakpointWindow::BreakpointWindow(DebuggerWindow2& parent, const wxPoint& main_
 {
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
-	this->wxWindowBase::SetBackgroundColour(*wxWHITE);
+	this->wxWindowBase::SetBackgroundColour(wxHelper::getBackgroundPrimary());
 	
 	wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
 

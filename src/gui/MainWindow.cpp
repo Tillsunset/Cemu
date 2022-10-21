@@ -41,6 +41,7 @@
 #include "gui/DownloadGraphicPacksWindow.h"
 #include "gui/GettingStartedDialog.h"
 #include "gui/helpers/wxHelpers.h"
+#include "wxHelper.h"
 #include "Cafe/HW/Latte/Renderer/Vulkan/VsyncDriver.h"
 #include "gui/input/InputSettings2.h"
 #include "input/InputManager.h"
@@ -274,6 +275,11 @@ private:
 MainWindow::MainWindow()
 	: wxFrame(nullptr, -1, GetInitialWindowTitle(), wxDefaultPosition, wxSize(1280, 720), wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX | wxCLIP_CHILDREN | wxRESIZE_BORDER)
 {
+
+	std::vector<wxUint32> arr;
+	for (int temp = wxSYS_COLOUR_SCROLLBAR; temp < wxSYS_COLOUR_MAX; temp++) {
+		arr.push_back(wxSystemSettings::GetColour(wxSystemColour(temp)).GetRGB());
+	}
 	gui_initHandleContextFromWxWidgetsWindow(g_window_info.window_main, this);
 	g_mainFrame = this;
 
@@ -1690,7 +1696,7 @@ public:
 	{
 		SetIcon(wxICON(M_WND_ICON128));
 
-		this->SetBackgroundColour(wxColour(0xFFFFFFFF));
+		this->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 
 		wxScrolledWindow* scrolledWindow = new wxScrolledWindow(this);
 

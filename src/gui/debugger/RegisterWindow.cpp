@@ -8,6 +8,7 @@
 #include "Cafe/OS/RPL/rpl.h"
 #include "Cafe/OS/RPL/rpl_structs.h"
 #include "Cafe/HW/Espresso/EspressoISA.h"
+#include "wxHelper.h"
 
 enum
 {
@@ -33,7 +34,7 @@ RegisterWindow::RegisterWindow(DebuggerWindow2& parent, const wxPoint& main_posi
 {
 	SetSizeHints(wxDefaultSize, wxDefaultSize);
 	SetMaxSize({ 400, 975 });
-	wxWindowBase::SetBackgroundColour(*wxWHITE);
+	wxWindowBase::SetBackgroundColour(wxHelper::getBackgroundPrimary());
 	
 	wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -48,14 +49,14 @@ RegisterWindow::RegisterWindow(DebuggerWindow2& parent, const wxPoint& main_posi
 		gpr_sizer->Add(new wxStaticText(scrolled_win, wxID_ANY, wxString::Format("R%d", i)), 0, wxLEFT, 5);
 
 		auto value = new wxTextCtrl(scrolled_win, kRegisterValueR0 + i, wxString::Format("%08x", 0), wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxNO_BORDER);
-		value->SetBackgroundColour(*wxWHITE);
+		value->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 		value->Bind(wxEVT_LEFT_DCLICK, &RegisterWindow::OnMouseDClickEvent, this);
 		//value->Bind(wxEVT_CONTEXT_MENU, &RegisterWindow::OnValueContextMenu, this);
 		gpr_sizer->Add(value, 0, wxLEFT|wxRIGHT, 5);
 
 		auto label = new wxTextCtrl(scrolled_win, kRegisterLabelR0 + i, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxNO_BORDER);
 		label->SetMinSize(wxSize(500, -1));
-		label->SetBackgroundColour(*wxWHITE);
+		label->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 		gpr_sizer->Add(label, 0, wxEXPAND);
 	}
 
@@ -63,13 +64,13 @@ RegisterWindow::RegisterWindow(DebuggerWindow2& parent, const wxPoint& main_posi
 		// LR
 		gpr_sizer->Add(new wxStaticText(scrolled_win, wxID_ANY, wxString::Format("LR")), 0, wxLEFT, 5);
 		auto value = new wxTextCtrl(scrolled_win, kRegisterValueLR, wxString::Format("%08x", 0), wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxNO_BORDER);
-		value->SetBackgroundColour(*wxWHITE);
+		value->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 		value->Bind(wxEVT_LEFT_DCLICK, &RegisterWindow::OnMouseDClickEvent, this);
 		//value->Bind(wxEVT_CONTEXT_MENU, &RegisterWindow::OnValueContextMenu, this);
 		gpr_sizer->Add(value, 0, wxLEFT | wxRIGHT, 5);
 		auto label = new wxTextCtrl(scrolled_win, kRegisterLabelLR, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxNO_BORDER);
 		label->SetMinSize(wxSize(500, -1));
-		label->SetBackgroundColour(*wxWHITE);
+		label->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 		gpr_sizer->Add(label, 0, wxEXPAND);
 	}
 
@@ -85,12 +86,12 @@ RegisterWindow::RegisterWindow(DebuggerWindow2& parent, const wxPoint& main_posi
 		fp_sizer->Add(new wxStaticText(scrolled_win, wxID_ANY, wxString::Format("FP%d", i)), 0, wxLEFT, 5);
 
 		auto value0 = new wxTextCtrl(scrolled_win, kRegisterValueFPR0_0 + i, wxString::Format("%lf", 0.0), wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxNO_BORDER);
-		value0->SetBackgroundColour(*wxWHITE);
+		value0->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 		value0->Bind(wxEVT_LEFT_DCLICK, &RegisterWindow::OnMouseDClickEvent, this);
 		fp_sizer->Add(value0, 0, wxLEFT | wxRIGHT, 5);
 
 		auto value1 = new wxTextCtrl(scrolled_win, kRegisterValueFPR1_0 + i, wxString::Format("%lf", 0.0), wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxNO_BORDER);
-		value1->SetBackgroundColour(*wxWHITE);
+		value1->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 		value1->Bind(wxEVT_LEFT_DCLICK, &RegisterWindow::OnMouseDClickEvent, this);
 		fp_sizer->Add(value1, 0, wxLEFT | wxRIGHT, 5);
 	}
@@ -103,7 +104,7 @@ RegisterWindow::RegisterWindow(DebuggerWindow2& parent, const wxPoint& main_posi
 	{
 		cr_sizer->Add(new wxStaticText(scrolled_win, wxID_ANY, wxString::Format("CR%d", i)), 0, wxLEFT, 5);
 		auto value = new wxTextCtrl(scrolled_win, kRegisterValueCR0 + i, "-", wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxNO_BORDER);
-		value->SetBackgroundColour(*wxWHITE);
+		value->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 		//value->Bind(wxEVT_CONTEXT_MENU, &RegisterWindow::OnValueContextMenu, this);
 		cr_sizer->Add(value, 0, wxRIGHT, 5);
 	}

@@ -545,7 +545,7 @@ namespace snd_core
 		static auto s_ax_interval_timer = now_cached() - kWaitDuration;
 		static auto s_last_check = now_cached();
 
-		const auto now = now_cached();
+		const auto now = s_last_check;
 		const auto diff = (now - s_ax_interval_timer);
 
 		if (diff < wait_duration)

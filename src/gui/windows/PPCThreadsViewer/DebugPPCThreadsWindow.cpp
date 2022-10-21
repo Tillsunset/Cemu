@@ -4,6 +4,7 @@
 #include "DebugPPCThreadsWindow.h"
 #include "Cafe/OS/RPL/rpl.h"
 #include "Cafe/OS/RPL/rpl_symbol_storage.h"
+#include "gui/wxHelper.h"
 
 #include <cinttypes>
 
@@ -35,7 +36,7 @@ wxEND_EVENT_TABLE()
 DebugPPCThreadsWindow::DebugPPCThreadsWindow(wxFrame& parent)
 	: wxFrame(&parent, wxID_ANY, _("PPC threads"), wxDefaultPosition, wxSize(930, 280), wxCLOSE_BOX | wxCLIP_CHILDREN | wxCAPTION | wxRESIZE_BORDER)
 {
-	wxFrame::SetBackgroundColour(*wxWHITE);
+	wxFrame::SetBackgroundColour(wxHelper::getBackgroundPrimary());
 
 	auto* sizer = new wxBoxSizer(wxVERTICAL);
 	m_thread_list = new wxListCtrl(this, GPLIST_ID, wxPoint(0, 0), wxSize(930, 240), wxLC_REPORT);

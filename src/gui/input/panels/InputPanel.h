@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wx/panel.h>
+#include <wxHelper.h>
 
 #include "input/emulated/EmulatedController.h"
 #include "input/api/Controller.h"
@@ -12,9 +13,9 @@ class wxComboBox;
 class InputPanel : public wxPanel
 {
 public:
-	const wxColour kKeyColourNormalMode = 0xfafafa;
+	const wxColour kKeyColourNormalMode = wxHelper::getBackgroundPrimary();
 	const wxColour kKeyColourEditMode = 0x99ccff;
-	const wxColour kKeyColourActiveMode = 0xE0E0E0;
+	const wxColour kKeyColourActiveMode = wxHelper::getBackgroundSecondary();
 
 	InputPanel(wxWindow* parent);
 

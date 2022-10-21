@@ -37,6 +37,7 @@ private:
 
 	// General
 	wxChoice * m_language;
+	wxChoice * m_theme;
 	wxCheckBox* m_save_window_position_size;
 	wxCheckBox* m_save_padwindow_position_size;
 	wxCheckBox* m_discord_presence, *m_fullscreen_menubar;

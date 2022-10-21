@@ -67,6 +67,13 @@ struct GraphicPackEntry
 	bool enabled = true;
 };
 
+enum Theme
+{
+	kDefault = 0,
+	kLightMode,
+	kDarkMode
+};
+
 enum GraphicAPI
 {
 	kOpenGL = 0,
@@ -362,8 +369,9 @@ struct CemuConfig
 	ConfigValue<bool> advanced_ppc_logging{ false };
 
 	ConfigValue<bool> permanent_storage{ true };
-	
+
 	ConfigValue<sint32> language{ wxLANGUAGE_DEFAULT };
+	ConfigValue<sint32> theme{ Theme::kDefault };
 	ConfigValue<bool> use_discord_presence{ true };
 	ConfigValue<std::wstring> mlc_path {};
 	ConfigValue<bool> fullscreen_menubar{ false };

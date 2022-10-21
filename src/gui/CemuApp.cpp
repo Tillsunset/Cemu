@@ -1,6 +1,7 @@
 #include "gui/CemuApp.h"
 #include "gui/MainWindow.h"
 #include "gui/wxgui.h"
+//#include "wxHelper.h"
 #include "config/CemuConfig.h"
 #include "Cafe/HW/Latte/Renderer/Vulkan/VulkanAPI.h"
 #include "gui/guiWrapper.h"
@@ -112,6 +113,11 @@ bool CemuApp::OnInit()
 	wxInitAllImageHandlers();
 
 	g_config.Load();
+
+	const sint32 theme = GetConfig().theme;
+
+
+
 	m_languages = GetAvailableLanguages();
 
 	const sint32 language = GetConfig().language;

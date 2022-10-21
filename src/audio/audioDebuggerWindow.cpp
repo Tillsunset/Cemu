@@ -4,6 +4,8 @@
 #include "Cafe/OS/libs/snd_core/ax.h"
 #include "Cafe/OS/libs/snd_core/ax_internal.h"
 
+#include <../gui/wxHelper.h>
+
 enum
 {
 	// options
@@ -141,7 +143,7 @@ AudioDebuggerWindow::AudioDebuggerWindow(wxFrame& parent)
 	}
 	RefreshVoiceList();
 
-	wxFrame::SetBackgroundColour(*wxWHITE);
+	wxFrame::SetBackgroundColour(wxHelper::getBackgroundPrimary());
 
 	// start refresh timer
 	static const int INTERVAL = 100; // milliseconds

@@ -4,6 +4,7 @@
 #include "gui/debugger/DebuggerWindow2.h"
 #include "Cafe/HW/Espresso/Debugger/Debugger.h"
 #include "Cafe/OS/RPL/rpl_symbol_storage.h"
+#include "wxHelper.h"
 
 enum ItemColumns
 {
@@ -15,7 +16,7 @@ enum ItemColumns
 SymbolWindow::SymbolWindow(DebuggerWindow2& parent, const wxPoint& main_position, const wxSize& main_size)
 	: wxFrame(&parent, wxID_ANY, _("Symbols"), wxDefaultPosition, wxSize(600, 250), wxSYSTEM_MENU | wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER | wxFRAME_FLOAT_ON_PARENT)
 {
-	this->wxWindowBase::SetBackgroundColour(*wxWHITE);
+	this->wxWindowBase::SetBackgroundColour(wxHelper::getBackgroundPrimary());
 
 	wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
 	m_symbol_ctrl = new SymbolListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);

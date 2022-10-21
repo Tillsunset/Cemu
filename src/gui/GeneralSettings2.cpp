@@ -104,7 +104,7 @@ wxPanel* GeneralSettings2::AddGeneralPage(wxNotebook* notebook)
 		auto* box_sizer = new wxStaticBoxSizer(box, wxVERTICAL);
 
 		{
-			auto* first_row = new wxFlexGridSizer(0, 2, 0, 0);
+			auto* first_row = new wxFlexGridSizer(0, 5, 0, 0);
 			first_row->SetFlexibleDirection(wxBOTH);
 			first_row->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
@@ -120,6 +120,14 @@ wxPanel* GeneralSettings2::AddGeneralPage(wxNotebook* notebook)
 			}
 
 			first_row->Add(m_language, 0, wxALL | wxEXPAND, 5);
+			first_row->AddSpacer(10);
+
+			first_row->Add(new wxStaticText(box, wxID_ANY, _("Theme"), wxDefaultPosition, wxDefaultSize, 0), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+
+			wxString theme_choices[] = { _("Default"), _("Light"), _("Dark") };
+			m_theme = new wxChoice(box, wxID_ANY, wxDefaultPosition, wxDefaultSize, std::size(theme_choices), theme_choices);
+
+			first_row->Add(m_theme, 0, wxALL | wxEXPAND, 5);
 
 			box_sizer->Add(first_row, 1, wxEXPAND, 5);
 		}

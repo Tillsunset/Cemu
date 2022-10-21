@@ -1,8 +1,10 @@
 #pragma once
 #include <wx/string.h>
+#include <wx/settings.h>
 
 namespace wxHelper
 {
+	static wxColour primary = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
     // wxString to utf8 std::string
     inline std::string MakeUTF8(const wxString& str)
     {
@@ -22,5 +24,21 @@ namespace wxHelper
         return wxString::FromUTF8(str.data(), str.size());
     }
 
+	inline wxColour getBackgroundPrimary() {
+		return primary;
+	}
 
+	inline wxColour getBackgroundSecondary() {
+		// get the background color so we can determine the theme in use
+		wxColour bgColour = primary;
+		uint32 bgLightness = (bgColour.GetRed() + bgColour.GetGreen() + bgColour.GetBlue()) / 3;
+		bool isDarkTheme = bgLightness < 128;
+		bgColour = bgColour.ChangeLightness(isDarkTheme ? 110 : 90);
+
+		// for very light themes we'll use a blue tint to match the older Windows Cemu look
+		if (bgLightness > 250)
+			bgColour = wxColour(bgColour.Red() - 13, bgColour.Green() - 6, bgColour.Blue() - 2);
+
+		return bgColour;
+	}
 };
