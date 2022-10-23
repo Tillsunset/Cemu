@@ -1131,3 +1131,8 @@ bool wxGameList::QueryIconForTitle(TitleId titleId, int& icon, int& iconSmall)
 	m_icon_cache_mtx.unlock();
 	return true;
 }
+
+void wxGameList::DeleteCachedStrings() 
+{
+	m_name_cache.clear();
+}
