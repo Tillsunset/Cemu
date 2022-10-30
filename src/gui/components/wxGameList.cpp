@@ -43,8 +43,11 @@ constexpr uint64 kDefaultEntryData = 0x1337;
 
 void _stripPathFilename(fs::path& path)
 {
-	if (path.has_extension())
-		path = path.parent_path();
+	if (!std::filesystem::is_directory(path))
+		path.remove_filename();
+	else if (_pathToUtf8(path).back() != '/') {
+		path += "/";
+	}
 }
 
 wxGameList::wxGameList(wxWindow* parent, wxWindowID id)
