@@ -30,6 +30,9 @@
 
 #include "Cafe/IOSU/PDM/iosu_pdm.h" // for last played and play time
 
+#include <algorithm>
+#include <locale>
+
 // public events
 wxDEFINE_EVENT(wxEVT_OPEN_SETTINGS, wxCommandEvent);
 wxDEFINE_EVENT(wxEVT_GAMELIST_BEGIN_UPDATE, wxCommandEvent);
@@ -618,8 +621,14 @@ void wxGameList::OnContextMenuSelected(wxCommandEvent& event)
 			case kContextMenuGameFolder:
 				{
 				fs::path path(gameInfo.GetBase().GetPath());
+				printf("%s\n", _pathToUtf8(path).c_str());
 				_stripPathFilename(path);
-				wxLaunchDefaultBrowser(wxHelper::FromUtf8(fmt::format("file:{}", _pathToUtf8(path))));
+
+				auto temp = fmt::format("file:{}", _pathToUtf8(path)).widen;
+
+				printf("%s\n", temp.c_str());///Volumes/BOOTCAMP/Program Files
+				wxString out = wxHelper::FromUtf8(temp);
+				wxLaunchDefaultBrowser(out);
 				break;
 				}
 			case kWikiPage:
