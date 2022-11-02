@@ -624,10 +624,18 @@ void wxGameList::OnContextMenuSelected(wxCommandEvent& event)
 				printf("%s\n", _pathToUtf8(path).c_str());
 				_stripPathFilename(path);
 
-				auto temp = fmt::format("file:{}", _pathToUtf8(path)).widen;
+//				auto temp = fmt::format("file:{}", _pathToUtf8(path));
+				std::string temp = "file:/Users/sebastian/Library/Application Support/";
+				for (int i = 0; i < temp.size(); ++i) {
+					if (temp[i] == ' ') {
+						temp.insert(i, "\\\\");
+						i += 2;
+					}
+				}
 
-				printf("%s\n", temp.c_str());///Volumes/BOOTCAMP/Program Files
 				wxString out = wxHelper::FromUtf8(temp);
+
+				printf("%s\n", out.utf8_string().c_str());
 				wxLaunchDefaultBrowser(out);
 				break;
 				}
