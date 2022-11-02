@@ -58,6 +58,7 @@ void CemuConfig::Load(XMLConfigParser& parser)
 	permanent_storage = parser.get("permanent_storage", permanent_storage);
 	
 	language = parser.get<sint32>("language", wxLANGUAGE_DEFAULT);
+	theme = parser.get<sint32>("theme", kThemeDefault);
 	use_discord_presence = parser.get("use_discord_presence", true);
 	fullscreen_menubar = parser.get("fullscreen_menubar", false);
 	check_update = parser.get("check_update", check_update);
@@ -347,6 +348,7 @@ void CemuConfig::Save(XMLConfigParser& parser)
 	config.set("mlc_path", boost::nowide::narrow(mlc_path.GetValue()).c_str());
 	config.set<bool>("permanent_storage", permanent_storage);
 	config.set<sint32>("language", language);
+	config.set<sint32>("theme", theme);
 	config.set<bool>("use_discord_presence", use_discord_presence);
 	config.set<bool>("fullscreen_menubar", fullscreen_menubar);
 	config.set<bool>("check_update", check_update);

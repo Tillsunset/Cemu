@@ -1,7 +1,7 @@
 #include "gui/CemuApp.h"
 #include "gui/MainWindow.h"
 #include "gui/wxgui.h"
-//#include "wxHelper.h"
+#include "gui/wxHelper.h"
 #include "config/CemuConfig.h"
 #include "Cafe/HW/Latte/Renderer/Vulkan/VulkanAPI.h"
 #include "gui/guiWrapper.h"
@@ -25,6 +25,7 @@ wxIMPLEMENT_APP_NO_MAIN(CemuApp);
 // defined in guiWrapper.cpp
 extern WindowInfo g_window_info;
 extern std::shared_mutex g_mutex;
+wxColour primary;
 
 int mainEmulatorHLE();
 void HandlePostUpdate();
@@ -115,8 +116,10 @@ bool CemuApp::OnInit()
 	g_config.Load();
 
 	const sint32 theme = GetConfig().theme;
-
-
+	auto temp = wxColour(theme);
+	if (theme != kThemeDefault) {
+		primary = temp;
+	}
 
 	m_languages = GetAvailableLanguages();
 

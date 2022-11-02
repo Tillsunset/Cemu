@@ -125,6 +125,7 @@ wxPanel* GeneralSettings2::AddGeneralPage(wxNotebook* notebook)
 			first_row->Add(new wxStaticText(box, wxID_ANY, _("Theme"), wxDefaultPosition, wxDefaultSize, 0), 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
 			wxString theme_choices[] = { _("Default"), _("Light"), _("Dark") };
+//			m_language->SetSelection(0);
 			m_theme = new wxChoice(box, wxID_ANY, wxDefaultPosition, wxDefaultSize, std::size(theme_choices), theme_choices);
 
 			first_row->Add(m_theme, 0, wxALL | wxEXPAND, 5);
@@ -851,6 +852,17 @@ void GeneralSettings2::StoreConfig()
 		}
 	}
 
+	selection = m_theme->GetSelection();
+	if (selection == 0) {
+		config.theme = kThemeDefault;
+	}
+	else if (selection == 1) {
+		config.theme = kLightMode;
+	}
+	else if (selection == 2) {
+		config.theme = kDarkMode;
+	}
+
 	// audio
 	if (m_audio_api->GetStringSelection() == kDirectSound)
 		config.audio_api = IAudioAPI::DirectSound;
@@ -1405,6 +1417,15 @@ void GeneralSettings2::ApplyConfig()
 			m_language->SetStringSelection(language->Description);
 			break;
 		}
+	}
+	if (config.theme == kThemeDefault) {
+		m_theme->SetSelection(0);
+	}
+	else if (config.theme == kLightMode) {
+		m_theme->SetSelection(1);
+	}
+	else if (config.theme == kDarkMode) {
+		m_theme->SetSelection(2);
 	}
 
 	// graphics

@@ -2,9 +2,10 @@
 #include <wx/string.h>
 #include <wx/settings.h>
 
+extern wxColour primary;
+
 namespace wxHelper
 {
-	static wxColour primary = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
     // wxString to utf8 std::string
     inline std::string MakeUTF8(const wxString& str)
     {
@@ -30,7 +31,7 @@ namespace wxHelper
 
 	inline wxColour getBackgroundSecondary() {
 		// get the background color so we can determine the theme in use
-		wxColour bgColour = primary;
+		wxColour bgColour = getBackgroundPrimary();
 		uint32 bgLightness = (bgColour.GetRed() + bgColour.GetGreen() + bgColour.GetBlue()) / 3;
 		bool isDarkTheme = bgLightness < 128;
 		bgColour = bgColour.ChangeLightness(isDarkTheme ? 110 : 90);
