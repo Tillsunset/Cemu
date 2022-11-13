@@ -1,10 +1,11 @@
 #pragma once
 
 #include <wx/panel.h>
-#include <wxHelper.h>
 
 #include "input/emulated/EmulatedController.h"
 #include "input/api/Controller.h"
+
+#include "gui/wxHelper.h"
 
 class ControllerBase;
 class wxTextCtrl;
@@ -14,7 +15,7 @@ class InputPanel : public wxPanel
 {
 public:
 	const wxColour kKeyColourNormalMode = wxHelper::getBackgroundPrimary();
-	const wxColour kKeyColourEditMode = 0x99ccff;
+	const wxColour kKeyColourEditMode = wxHelper::getBackgroundPrimary();
 	const wxColour kKeyColourActiveMode = wxHelper::getBackgroundSecondary();
 
 	InputPanel(wxWindow* parent);

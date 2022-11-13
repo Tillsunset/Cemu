@@ -275,17 +275,16 @@ private:
 MainWindow::MainWindow()
 	: wxFrame(nullptr, -1, GetInitialWindowTitle(), wxDefaultPosition, wxSize(1280, 720), wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX | wxCLIP_CHILDREN | wxRESIZE_BORDER)
 {
-
-	std::vector<wxUint32> arr;
-	for (int temp = wxSYS_COLOUR_SCROLLBAR; temp < wxSYS_COLOUR_MAX; temp++) {
-		arr.push_back(wxSystemSettings::GetColour(wxSystemColour(temp)).GetRGB());
-	}
 	gui_initHandleContextFromWxWidgetsWindow(g_window_info.window_main, this);
 	g_mainFrame = this;
 
 	RecreateMenu();
 	SetClientSize(1280, 720);
 	SetIcon(wxICON(M_WND_ICON128));
+
+#if BOOST_OS_MACOS
+	this->EnableFullScreenView(true);
+#endif
 
 #if BOOST_OS_WINDOWS
 	HICON hWindowIcon = (HICON)LoadImageA(NULL, "M_WND_ICON16", IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
@@ -1697,8 +1696,6 @@ public:
 	void Create(wxWindow* parent = NULL)
 	{
 		SetIcon(wxICON(M_WND_ICON128));
-
-		this->SetBackgroundColour(wxHelper::getBackgroundPrimary());
 
 		wxScrolledWindow* scrolledWindow = new wxScrolledWindow(this);
 

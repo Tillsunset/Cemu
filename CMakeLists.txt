@@ -2,10 +2,18 @@ cmake_minimum_required(VERSION 3.21.1)
 
 option(ENABLE_VCPKG "Enable the vcpkg package manager" ON)
 option(PORTABLE "All data created and maintained by Cemu will be in the directory where the executable file is located" ON)
+option(MACOS_BUNDLE "The executable when built on macOS will be created as an application bundle" OFF)
 set(EXPERIMENTAL_VERSION "" CACHE STRING "") # used by CI script to set experimental version
 
 if (EXPERIMENTAL_VERSION)
-  add_definitions(-DEMULATOR_VERSION_MINOR=${EXPERIMENTAL_VERSION})
+	add_definitions(-DEMULATOR_VERSION_MINOR=${EXPERIMENTAL_VERSION})
+	execute_process(
+			COMMAND git log --format=%h -1
+			WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+			OUTPUT_VARIABLE GIT_HASH
+			OUTPUT_STRIP_TRAILING_WHITESPACE
+	)
+	add_definitions(-DEMULATOR_HASH=${GIT_HASH})
 endif()
 
 if (ENABLE_VCPKG)
@@ -20,7 +28,7 @@ if (ENABLE_VCPKG)
 	endif()
 endif()
 
-project(Cemu VERSION 2.0)
+project(Cemu VERSION 2.0.0)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
