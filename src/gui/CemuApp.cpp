@@ -20,6 +20,8 @@
 #include "Cafe/TitleList/TitleList.h"
 #include "Cafe/TitleList/SaveList.h"
 
+#include <wx/settings.h>
+
 wxIMPLEMENT_APP_NO_MAIN(CemuApp);
 
 // defined in guiWrapper.cpp
@@ -122,6 +124,9 @@ bool CemuApp::OnInit()
 	auto temp = wxColour(theme);
 	if (theme != kThemeDefault) {
 		primary = temp;
+	}
+	else {
+		primary = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
 	}
 
 	m_languages = GetAvailableLanguages();
